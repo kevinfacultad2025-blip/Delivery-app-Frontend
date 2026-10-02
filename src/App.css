@@ -153,71 +153,243 @@ body {
   pointer-events: none;
 }
 
-/* =========================================================
-   NAVBAR
-========================================================= */
+/* =========================
+   NAVBAR FLOTANTE
+========================= */
 
 .brand-navbar {
-  position: absolute;
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 1150px);
+    min-height: 64px;
+    z-index: 1030;
 
-  top: 0;
-  left: 0;
+    background: rgba(43, 45, 66, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-  width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
 
-  z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 
-  background:
-    rgba(28, 29, 41, 0.55);
+    padding: 0 14px;
 
-  backdrop-filter:
-    blur(6px);
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
 
-  -webkit-backdrop-filter:
-    blur(6px);
+.brand-navbar:hover {
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.3);
+}
 
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.2);
+.brand-navbar .container-fluid {
+    min-height: 64px;
+}
+
+.brand-navbar .navbar-nav {
+    gap: 8px;
+}
+
+.brand-navbar .nav-item {
+    display: flex;
+    align-items: center;
 }
 
 .brand-navbar .nav-link {
-  color: var(--primary-dark);
+    position: relative;
 
-  font-weight: 600;
+    color: var(--primary) !important;
 
-  transition:
-    color 0.3s ease;
+    font-size: 1.05rem;
+    font-weight: 600;
+
+    padding: 10px 18px !important;
+
+    border-radius: 10px;
+
+    transition:
+        color 0.25s ease,
+        background-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.brand-navbar .nav-link::after {
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--primary);
+
+    transform: translateX(-50%);
+
+    transition: width 0.25s ease;
 }
 
 .brand-navbar .nav-link:hover {
-  color: var(--primary);
+    color: #ffffff !important;
+    background: rgba(255, 107, 53, 0.12);
+
+    transform: translateY(-2px);
 }
+
+.brand-navbar .nav-link:hover::after {
+    width: 60%;
+}
+
+
+/* =========================
+   BOTÓN HAMBURGUESA
+========================= */
 
 .brand-navbar .navbar-toggler {
-  border:
-    2px solid rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 107, 53, 0.5);
 
-  padding: 8px 10px;
+    color: var(--primary);
 
-  border-radius: 8px;
+    padding: 8px 11px;
+
+    border-radius: 10px;
+
+    box-shadow: none !important;
 }
 
-.brand-navbar .navbar-toggler-icon {
-  background-image:
-    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.brand-navbar .navbar-toggler i {
+    font-size: 1.6rem;
+    line-height: 1;
 }
 
 .brand-navbar .navbar-toggler:hover {
-  background-color:
-    rgba(255, 107, 53, 0.25);
-
-  border-color:
-    var(--primary);
+    background: rgba(255, 107, 53, 0.12);
 }
 
-.brand-navbar .navbar-toggler:focus {
-  box-shadow:
-    0 0 0 3px rgba(255, 107, 53, 0.35);
+
+/* =========================
+   LOGO / ICONO EN CELULAR
+========================= */
+
+.brand-navbar .navbar-brand {
+    color: var(--primary);
+
+    font-size: 1.5rem;
+
+    padding: 8px;
+}
+
+.brand-navbar .navbar-brand:hover {
+    color: #ffffff;
+}
+
+
+/* =========================
+   SECCIONES Y SCROLL
+========================= */
+
+#inicio,
+#menu,
+#pedido,
+#sobre-nosotros,
+#contacto {
+    scroll-margin-top: 105px;
+}
+
+
+/* =========================
+   TABLETS
+========================= */
+
+@media (max-width: 991.98px) {
+
+    .brand-navbar {
+        width: min(94%, 700px);
+        padding: 0 12px;
+    }
+
+    .brand-navbar .navbar-collapse {
+        margin-top: 10px;
+
+        padding: 10px;
+
+        background: rgba(43, 45, 66, 0.98);
+
+        border-radius: 14px;
+    }
+
+    .brand-navbar .navbar-nav {
+        gap: 4px;
+    }
+
+    .brand-navbar .nav-item {
+        width: 100%;
+    }
+
+    .brand-navbar .nav-link {
+        width: 100%;
+        text-align: center;
+
+        padding: 12px 16px !important;
+    }
+
+}
+
+
+/* =========================
+   CELULARES
+========================= */
+
+@media (max-width: 575.98px) {
+
+    .brand-navbar {
+        top: 10px;
+
+        width: calc(100% - 20px);
+
+        min-height: 56px;
+
+        border-radius: 15px;
+
+        padding: 0 10px;
+    }
+
+    .brand-navbar .container-fluid {
+        min-height: 56px;
+    }
+
+    .brand-navbar .navbar-brand {
+        font-size: 1.35rem;
+    }
+
+    .brand-navbar .navbar-toggler {
+        padding: 7px 10px;
+    }
+
+    .brand-navbar .navbar-toggler i {
+        font-size: 1.45rem;
+    }
+
+    .brand-navbar .navbar-collapse {
+        margin-top: 8px;
+
+        padding: 8px;
+
+        border-radius: 12px;
+    }
+
+    .brand-navbar .nav-link {
+        font-size: 0.98rem;
+
+        padding: 10px 14px !important;
+    }
+
 }
 
 /* =========================================================

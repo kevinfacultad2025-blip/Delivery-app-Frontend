@@ -383,10 +383,18 @@ function App() {
 
                 <section className="hero-overlay"></section>
 
-                <nav className="navbar navbar-expand-lg brand-navbar">
-                    <section className="container-fluid px-4">
+                                <nav className="navbar navbar-expand-lg brand-navbar">
+                    <section className="container-fluid">
+                        <a
+                            className="navbar-brand d-lg-none"
+                            href="#inicio"
+                            aria-label="Ir al inicio"
+                        >
+                            <i className="bi bi-shop"></i>
+                        </a>
+
                         <button
-                            className="navbar-toggler ms-auto"
+                            className="navbar-toggler"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#navbarNav"
@@ -394,7 +402,7 @@ function App() {
                             aria-expanded="false"
                             aria-label="Abrir menú"
                         >
-                            <span className="navbar-toggler-icon"></span>
+                            <i className="bi bi-list"></i>
                         </button>
 
                         <section
