@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
 
+import { useEffect, useState } from "react";
 import {
     productosPorCategoria,
     nombresCategorias,
     categorias
 } from "./data/products";
-
 import Navbar from "./components/Navbar";
-import Confirmation from "./components/Confirmation";
-import About from "./components/About";
-import Footer from "./components/Footer";
-import ProductModal from "./components/ProductModal";
+import Hero from "./components/Hero";
+import Menu from "./components/Menu";
+import Submenu from "./components/Submenu";
+import Cart from "./components/Cart";
+import OrderForm from "./components/OrderForm";
 
 function App() {
     // ==========================================================
@@ -35,6 +35,7 @@ function App() {
 
     const [telefonoValido, setTelefonoValido] = useState(false);
     const [formularioEnviado, setFormularioEnviado] = useState(false);
+
     const [introVisible, setIntroVisible] = useState(true);
 
     // ==========================================================
@@ -157,7 +158,9 @@ function App() {
         setCategoriaSeleccionada(categoria);
 
         setTimeout(() => {
-            const submenu = document.getElementById("submenu-productos");
+            const submenu = document.getElementById(
+                "submenu-productos"
+            );
 
             if (submenu) {
                 submenu.scrollIntoView({
@@ -331,708 +334,335 @@ function App() {
                 HEADER / HERO
             ================================================== */}
 
-            <header
-                id="inicio"
-                className="hero position-relative"
-            >
-                <section
-                    id="heroCarousel"
-                    className="carousel slide hero-carousel"
-                    data-bs-ride="carousel"
-                    data-bs-interval="4000"
-                >
-                    <section className="carousel-inner h-100">
-                        <article className="carousel-item active h-100">
-                            <img
-                                src="/media/carrusel-producto1.jpg"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Hamburguesa de NombreDelLocal"
-                            />
-                        </article>
-
-                        <article className="carousel-item h-100">
-                            <img
-                                src="/media/carrusel-producto2.avif"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Pizza de NombreDelLocal"
-                            />
-                        </article>
-
-                        <article className="carousel-item h-100">
-                            <img
-                                src="/media/carrusel-producto3.jpg"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Sándwich de milanesa de NombreDelLocal"
-                            />
-                        </article>
-
-                        <article className="carousel-item h-100">
-                            <img
-                                src="/media/carrusel-producto4.jpg"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Empanadas de NombreDelLocal"
-                            />
-                        </article>
-
-                        <article className="carousel-item h-100">
-                            <img
-                                src="/media/carrusel-producto5.avif"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Postres de NombreDelLocal"
-                            />
-                        </article>
-                    </section>
-                </section>
-
-                <section className="hero-overlay"></section>
+                <Hero />
 
                 <Navbar />
 
-                <section className="hero-content position-relative text-center text-white">
-                    <img
-                        src="/media/logo_local.png"
-                        alt="Logo de NombreDelLocal"
-                        className="hero-logo"
-                    />
 
-                    <h1 className="display-4 fw-bold">
-                        ¡Bienvenidos a NombreDelLocal!
-                    </h1>
-                </section>
-            </header>
 
             <main>
                 {/* ==================================================
                     MENÚ
                 ================================================== */}
 
-                <section
-                    id="menu"
-                    className="menu-section"
-                >
-                    <section className="container">
-                        <header className="menu-header text-center">
-                            <span className="menu-kicker">
-                                NUESTRO MENÚ
-                            </span>
-
-                            <h2>¿Qué deseas comer hoy?</h2>
-
-                            <p>
-                                Elegí una categoría para comenzar tu
-                                pedido
-                            </p>
-                        </header>
-
-                        <section className="menu-categories">
-                            <section className="row g-4 justify-content-center">
-                                {categorias.map((categoria) => (
-                                    <article
-                                        className="col-12 col-sm-6 col-lg-4"
-                                        key={categoria.id}
-                                    >
-                                        <button
-                                            type="button"
-                                            className="category-card border-0 p-0 w-100"
-                                            data-category={categoria.id}
-                                            onClick={() =>
-                                                mostrarSubmenu(
-                                                    categoria.id
-                                                )
-                                            }
-                                        >
-                                            <img
-                                                src={categoria.imagen}
-                                                alt={categoria.nombre}
-                                                className="category-image"
-                                            />
-
-                                            <section className="category-overlay">
-                                                <section className="category-content">
-                                                    <span className="category-number">
-                                                        {categoria.numero}
-                                                    </span>
-
-                                                    <h3>
-                                                        {categoria.nombre}
-                                                    </h3>
-
-                                                    <span className="category-action">
-                                                        Ver opciones{" "}
-                                                        <i className="bi bi-arrow-up-right"></i>
-                                                    </span>
-                                                </section>
-                                            </section>
-                                        </button>
-                                    </article>
-                                ))}
-                            </section>
-                        </section>
+                    <Menu
+    categoriaSeleccionada={categoriaSeleccionada}
+    mostrarSubmenu={mostrarSubmenu}
+    volverAlMenu={volverAlMenu}
+    agregarAlCarrito={agregarAlCarrito}
+    abrirInformacionProducto={abrirInformacionProducto}
+    formatearPrecio={formatearPrecio}
+    productosPorCategoria={productosPorCategoria}
+    nombresCategorias={nombresCategorias}
+    categorias={categorias}
+/>
 
                         {/* ==================================================
                             SUBMENÚ
                         ================================================== */}
 
-                        {categoriaSeleccionada && (
-                            <section
-                                id="submenu-productos"
-                                className="mt-5"
-                            >
-                                <header className="submenu-header text-center mb-4">
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-secondary mb-4"
-                                        onClick={volverAlMenu}
-                                    >
-                                        <i className="bi bi-arrow-left"></i>{" "}
-                                        Volver al menú
-                                    </button>
-
-                                    <h3 className="submenu-titulo">
-                                        {
-                                            nombresCategorias[
-                                                categoriaSeleccionada
-                                            ]
-                                        }
-                                    </h3>
-                                </header>
-
-                                <section className="row g-4 justify-content-center">
-                                    {productosPorCategoria[
-                                        categoriaSeleccionada
-                                    ].map((producto) => (
-                                        <article
-                                            className="col-12 col-md-6 col-lg-4"
-                                            key={producto.id}
-                                        >
-                                            <section className="submenu-producto-card h-100">
-                                                <img
-                                                    src={producto.imagen}
-                                                    alt={producto.nombre}
-                                                    className="submenu-producto-imagen"
-                                                />
-
-                                                <section className="submenu-producto-body">
-                                                    <h4 className="submenu-producto-nombre">
-                                                        {producto.nombre}
-                                                    </h4>
-
-                                                    <p className="submenu-producto-precio">
-                                                        {formatearPrecio(
-                                                            producto.precio
-                                                        )}
-                                                    </p>
-
-                                                    <section className="submenu-producto-botones">
-                                                        <button
-                                                            type="button"
-                                                            className="btn brand-btn-primary btn-agregar-submenu"
-                                                            onClick={() =>
-                                                                agregarAlCarrito(
-                                                                    producto.id,
-                                                                    producto.nombre,
-                                                                    producto.precio
-                                                                )
-                                                            }
-                                                        >
-                                                            <i className="bi bi-cart-plus"></i>{" "}
-                                                            Agregar al pedido
-                                                        </button>
-
-                                                        <button
-                                                            type="button"
-                                                            className="btn btn-mas-info-submenu btn-mas-info"
-                                                            onClick={() =>
-                                                                abrirInformacionProducto(
-                                                                    producto
-                                                                )
-                                                            }
-                                                        >
-                                                            <i className="bi bi-info-circle"></i>{" "}
-                                                            Más información
-                                                        </button>
-                                                    </section>
-                                                </section>
-                                            </section>
-                                        </article>
-                                    ))}
-                                </section>
-                            </section>
-                        )}
-                    </section>
-                </section>
+                            <Submenu
+    categoriaSeleccionada={categoriaSeleccionada}
+    volverAlMenu={volverAlMenu}
+    agregarAlCarrito={agregarAlCarrito}
+    abrirInformacionProducto={abrirInformacionProducto}
+    formatearPrecio={formatearPrecio}
+    productosPorCategoria={productosPorCategoria}
+    nombresCategorias={nombresCategorias}
+/>
 
                 {/* ==================================================
                     CARRITO
                 ================================================== */}
 
-                <aside
-                    id="carrito"
-                    className="py-5 bg-white"
-                >
-                    <section className="container">
-                        <article
-                            className="card shadow-sm brand-card mx-auto"
-                            style={{ maxWidth: "900px" }}
-                        >
-                            <section className="card-body p-4">
-                                <h2 className="h4 fw-bold mb-4 brand-title">
-                                    Tu Carrito
-                                </h2>
-
-                                <ul className="list-group list-group-flush">
-                                    {carrito.length === 0 ? (
-                                        <li className="list-group-item text-center text-muted py-4">
-                                            Todavía no agregaste
-                                            productos al carrito.
-                                        </li>
-                                    ) : (
-                                        carrito.map((item) => (
-                                            <li
-                                                className="list-group-item d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 py-3"
-                                                key={item.id}
-                                            >
-                                                <span className="fw-bold">
-                                                    {item.nombre}
-                                                </span>
-
-                                                <section className="d-flex align-items-center gap-2">
-                                                    <button
-                                                        className="btn btn-sm brand-btn-primary"
-                                                        type="button"
-                                                        onClick={() =>
-                                                            cambiarCantidad(
-                                                                item.id,
-                                                                -1
-                                                            )
-                                                        }
-                                                    >
-                                                        -
-                                                    </button>
-
-                                                    <span className="fw-bold px-2">
-                                                        {item.cantidad}
-                                                    </span>
-
-                                                    <button
-                                                        className="btn btn-sm brand-btn-primary"
-                                                        type="button"
-                                                        onClick={() =>
-                                                            cambiarCantidad(
-                                                                item.id,
-                                                                1
-                                                            )
-                                                        }
-                                                    >
-                                                        +
-                                                    </button>
-                                                </section>
-
-                                                <span className="fw-bold text-end">
-                                                    {formatearPrecio(
-                                                        item.precio *
-                                                            item.cantidad
-                                                    )}
-                                                </span>
-
-                                                <button
-                                                    className="btn btn-sm btn-danger"
-                                                    type="button"
-                                                    onClick={() =>
-                                                        eliminarDelCarrito(
-                                                            item.id
-                                                        )
-                                                    }
-                                                >
-                                                    <i className="bi bi-trash"></i>{" "}
-                                                    Eliminar
-                                                </button>
-                                            </li>
-                                        ))
-                                    )}
-                                </ul>
-
-                                <section className="d-flex justify-content-end mt-4">
-                                    <p className="fs-5 fw-bold brand-title mb-0">
-                                        Total:{" "}
-                                        <span id="total-precio">
-                                            {formatearPrecio(
-                                                calcularTotal()
-                                            )}
-                                        </span>
-                                    </p>
-                                </section>
-
-                                {porcentajeDescuento > 0 && (
-                                    <p className="text-success fw-bold text-end mt-2 mb-0">
-                                        Descuento aplicado:{" "}
-                                        {porcentajeDescuento}%
-                                    </p>
-                                )}
-                            </section>
-                        </article>
-                    </section>
-                </aside>
+                    <Cart
+    carrito={carrito}
+    cambiarCantidad={cambiarCantidad}
+    eliminarDelCarrito={eliminarDelCarrito}
+    formatearPrecio={formatearPrecio}
+    calcularTotal={calcularTotal}
+    porcentajeDescuento={porcentajeDescuento}
+/>
 
                 {/* ==================================================
                     FORMULARIO DE PEDIDO
                 ================================================== */}
 
-                <section
-                    id="pedido"
-                    className="py-5"
-                >
-                    <section className="container">
-                        <article
-                            className="card shadow-sm brand-card mx-auto"
-                            style={{ maxWidth: "700px" }}
-                        >
-                            <section className="card-body p-4 p-md-5">
-                                <h2 className="text-center fw-bold mb-4 brand-title">
-                                    Confirmar Pedido
-                                </h2>
-
-                                <form
-                                    className="row g-3"
-                                    onSubmit={manejarEnvioFormulario}
-                                >
-                                    <section className="col-12 mb-2">
-                                        <label className="form-label fw-semibold d-block">
-                                            Modo de entrega
-                                        </label>
-
-                                        <section
-                                            className="btn-group w-100"
-                                            role="group"
-                                            aria-label="Modo de entrega"
-                                        >
-                                            <input
-                                                type="radio"
-                                                className="btn-check"
-                                                name="tipo-entrega"
-                                                id="entrega-delivery"
-                                                value="delivery"
-                                                checked={
-                                                    tipoEntrega ===
-                                                    "delivery"
-                                                }
-                                                onChange={(evento) =>
-                                                    setTipoEntrega(
-                                                        evento.target.value
-                                                    )
-                                                }
-                                            />
-
-                                            <label
-                                                className="btn btn-outline-primary fw-bold"
-                                                htmlFor="entrega-delivery"
-                                            >
-                                                <i className="bi bi-truck me-1"></i>{" "}
-                                                Delivery
-                                            </label>
-
-                                            <input
-                                                type="radio"
-                                                className="btn-check"
-                                                name="tipo-entrega"
-                                                id="entrega-retiro"
-                                                value="retiro"
-                                                checked={
-                                                    tipoEntrega ===
-                                                    "retiro"
-                                                }
-                                                onChange={(evento) =>
-                                                    setTipoEntrega(
-                                                        evento.target.value
-                                                    )
-                                                }
-                                            />
-
-                                            <label
-                                                className="btn btn-outline-primary fw-bold"
-                                                htmlFor="entrega-retiro"
-                                            >
-                                                <i className="bi bi-shop me-1"></i>{" "}
-                                                Retirar en local
-                                            </label>
-                                        </section>
-                                    </section>
-
-                                    <section className="col-12">
-                                        <label
-                                            htmlFor="nombre"
-                                            className="form-label fw-semibold"
-                                        >
-                                            Nombre completo
-                                        </label>
-
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="nombre"
-                                            value={nombre}
-                                            onChange={(evento) =>
-                                                setNombre(
-                                                    evento.target.value
-                                                )
-                                            }
-                                            required
-                                            placeholder="Ej: Juan Pérez"
-                                        />
-                                    </section>
-
-                                    {tipoEntrega === "delivery" && (
-                                        <section className="col-12">
-                                            <label
-                                                htmlFor="direccion"
-                                                className="form-label fw-semibold"
-                                            >
-                                                Dirección de entrega
-                                            </label>
-
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="direccion"
-                                                value={direccion}
-                                                onChange={(evento) =>
-                                                    setDireccion(
-                                                        evento.target.value
-                                                    )
-                                                }
-                                                required
-                                                placeholder="Ej: Av. Alem 123"
-                                            />
-                                        </section>
-                                    )}
-
-                                    <section className="col-12 col-md-6">
-                                        <label
-                                            htmlFor="telefono"
-                                            className="form-label fw-semibold"
-                                        >
-                                            Teléfono / WhatsApp
-                                        </label>
-
-                                        <input
-                                            type="tel"
-                                            className={`form-control ${
-                                                telefono.length > 0
-                                                    ? telefonoValido
-                                                        ? "is-valid"
-                                                        : "is-invalid"
-                                                    : ""
-                                            }`}
-                                            id="telefono"
-                                            value={telefono}
-                                            onChange={manejarTelefono}
-                                            required
-                                            placeholder="Ej: 3811234567"
-                                        />
-
-                                        <section className="invalid-feedback">
-                                            Ingresá un número válido
-                                            de mínimo 10 dígitos.
-                                        </section>
-                                    </section>
-
-                                    <section className="col-12 col-md-6">
-                                        <label
-                                            htmlFor="metodo-pago"
-                                            className="form-label fw-semibold"
-                                        >
-                                            Método de pago
-                                        </label>
-
-                                        <select
-                                            className="form-select"
-                                            id="metodo-pago"
-                                            value={metodoPago}
-                                            onChange={(evento) =>
-                                                setMetodoPago(
-                                                    evento.target.value
-                                                )
-                                            }
-                                        >
-                                            <option value="efectivo">
-                                                Efectivo
-                                            </option>
-
-                                            <option value="transferencia">
-                                                Transferencia
-                                            </option>
-
-                                            <option value="tarjeta">
-                                                Tarjeta (POSNET al
-                                                entregar)
-                                            </option>
-                                        </select>
-                                    </section>
-
-                                    {metodoPago === "efectivo" && (
-                                        <section className="col-12">
-                                            <label
-                                                htmlFor="monto-efectivo"
-                                                className="form-label fw-semibold"
-                                            >
-                                                ¿Con cuánto vas a
-                                                pagar?{" "}
-                                                <small className="text-muted">
-                                                    (para llevar
-                                                    cambio)
-                                                </small>
-                                            </label>
-
-                                            <input
-                                                type="number"
-                                                className={`form-control ${
-                                                    montoEfectivo !== "" &&
-                                                    Number(
-                                                        montoEfectivo
-                                                    ) <
-                                                        calcularTotalConDescuento()
-                                                        ? "is-invalid"
-                                                        : ""
-                                                }`}
-                                                id="monto-efectivo"
-                                                value={montoEfectivo}
-                                                onChange={(evento) =>
-                                                    setMontoEfectivo(
-                                                        evento.target.value
-                                                    )
-                                                }
-                                                min="0"
-                                                placeholder="Ej: 10000"
-                                            />
-
-                                            <section className="invalid-feedback">
-                                                El monto ingresado
-                                                debe ser mayor o igual
-                                                al total a pagar.
-                                            </section>
-                                        </section>
-                                    )}
-
-                                    {metodoPago === "transferencia" && (
-                                        <section className="col-12">
-                                            <article className="alert alert-info border-0 shadow-sm mb-0">
-                                                <p className="fw-bold mb-1">
-                                                    <i className="bi bi-bank me-1"></i>{" "}
-                                                    Datos para
-                                                    transferir:
-                                                </p>
-
-                                                <p className="small mb-1">
-                                                    <strong>
-                                                        Alias:
-                                                    </strong>{" "}
-                                                    nombredellocal.mp
-                                                </p>
-
-                                                <p className="small mb-0">
-                                                    <strong>
-                                                        CBU:
-                                                    </strong>{" "}
-                                                    0000003100012345678901
-                                                </p>
-                                            </article>
-                                        </section>
-                                    )}
-
-                                    <section className="col-12 mt-3">
-                                        <label
-                                            htmlFor="codigo-descuento"
-                                            className="form-label fw-semibold"
-                                        >
-                                            Código de descuento
-                                        </label>
-
-                                        <section className="input-group">
-                                            <input
-                                                type="text"
-                                                className="form-control text-uppercase"
-                                                id="codigo-descuento"
-                                                value={codigoCupon}
-                                                onChange={(evento) =>
-                                                    setCodigoCupon(
-                                                        evento.target.value
-                                                    )
-                                                }
-                                                placeholder="Ej: PRIMERPEDIDO"
-                                                disabled={
-                                                    porcentajeDescuento > 0
-                                                }
-                                            />
-
-                                            <button
-                                                className="btn btn-outline-secondary fw-bold"
-                                                type="button"
-                                                onClick={aplicarCupon}
-                                                disabled={
-                                                    porcentajeDescuento > 0
-                                                }
-                                            >
-                                                Aplicar
-                                            </button>
-                                        </section>
-
-                                        {mensajeCupon && (
-                                            <p
-                                                className={`form-text mt-1 fw-bold ${
-                                                    porcentajeDescuento > 0
-                                                        ? "text-success"
-                                                        : "text-danger"
-                                                }`}
-                                            >
-                                                {mensajeCupon}
-                                            </p>
-                                        )}
-                                    </section>
-
-                                    <section className="col-12 mt-4">
-                                        <button
-                                            type="submit"
-                                            className="btn brand-btn-primary w-100 py-2 fw-bold"
-                                        >
-                                            <i className="bi bi-check-circle me-1"></i>{" "}
-                                            Confirmar Pedido
-                                        </button>
-                                    </section>
-                                </form>
-                            </section>
-                        </article>
-                    </section>
-                </section>
+                    <OrderForm
+    manejarEnvioFormulario={manejarEnvioFormulario}
+    tipoEntrega={tipoEntrega}
+    setTipoEntrega={setTipoEntrega}
+    nombre={nombre}
+    setNombre={setNombre}
+    direccion={direccion}
+    setDireccion={setDireccion}
+    telefono={telefono}
+    telefonoValido={telefonoValido}
+    manejarTelefono={manejarTelefono}
+    metodoPago={metodoPago}
+    setMetodoPago={setMetodoPago}
+    montoEfectivo={montoEfectivo}
+    setMontoEfectivo={setMontoEfectivo}
+    calcularTotalConDescuento={calcularTotalConDescuento}
+    codigoCupon={codigoCupon}
+    setCodigoCupon={setCodigoCupon}
+    aplicarCupon={aplicarCupon}
+    porcentajeDescuento={porcentajeDescuento}
+    mensajeCupon={mensajeCupon}
+/>
 
                 {/* ==================================================
                     CONFIRMACIÓN
                 ================================================== */}
 
-                <Confirmation
-                    formularioEnviado={formularioEnviado}
-                />
+                {formularioEnviado && (
+                    <section
+                        id="confirmacion"
+                        className="py-5"
+                    >
+                        <section className="container">
+                            <article
+                                className="alert brand-alert-success text-center mx-auto p-4 shadow-sm"
+                                style={{ maxWidth: "700px" }}
+                            >
+                                <h2 className="h4 fw-bold">
+                                    ¡Pedido Confirmado!
+                                </h2>
+
+                                <p className="mb-1">
+                                    Gracias por tu compra. Tu pedido
+                                    está siendo preparado.
+                                </p>
+
+                                <p className="fw-bold mb-0">
+                                    ¡Muchas gracias por elegirnos!
+                                </p>
+                            </article>
+                        </section>
+                    </section>
+                )}
 
                 {/* ==================================================
                     SOBRE NOSOTROS
                 ================================================== */}
 
-                <About />
+                <section
+                    id="sobre-nosotros"
+                    className="py-5"
+                >
+                    <section className="container">
+                        <section className="row align-items-center g-5">
+                            <article className="col-12 col-lg-6">
+                                <img
+                                    src="/media/carrusel-producto1.jpg"
+                                    className="img-fluid rounded-4 shadow-sm w-100"
+                                    alt="Comida preparada por NombreDelLocal"
+                                />
+                            </article>
+
+                            <article className="col-12 col-lg-6">
+                                <p className="fw-bold mb-2 brand-precio">
+                                    SOBRE NOSOTROS
+                                </p>
+
+                                <h2 className="fw-bold mb-4 brand-title">
+                                    Una historia que empezó con
+                                    una idea sencilla
+                                </h2>
+
+                                <p className="text-muted">
+                                    Todo comenzó con una idea simple:
+                                    preparar comida rica, abundante y
+                                    hecha con dedicación, para que
+                                    cada persona pudiera disfrutarla
+                                    desde la comodidad de su casa.
+                                </p>
+
+                                <p className="text-muted">
+                                    Con el tiempo, ese pequeño sueño
+                                    fue creciendo. Hoy seguimos
+                                    manteniendo la misma esencia:
+                                    elegir buenos ingredientes,
+                                    preparar cada pedido con cuidado y
+                                    ofrecer una experiencia agradable
+                                    desde el primer clic hasta que la
+                                    comida llega a la mesa.
+                                </p>
+
+                                <blockquote className="border-start border-4 ps-3 my-4">
+                                    <p className="fst-italic mb-0">
+                                        “Un buen pedido no es solamente
+                                        una comida. Es un momento para
+                                        compartir, darse un gusto y
+                                        disfrutar.”
+                                    </p>
+                                </blockquote>
+
+                                <p className="fw-bold mb-0">
+                                    Gracias por elegirnos y ser parte
+                                    de nuestra historia.
+                                </p>
+                            </article>
+                        </section>
+                    </section>
+                </section>
             </main>
 
             {/* ==================================================
                 FOOTER
             ================================================== */}
 
-            <Footer />
+            <footer
+                id="contacto"
+                className="brand-footer pt-5 pb-3 mt-5"
+            >
+                <section className="container">
+                    <section className="row g-4">
+                        <article className="col-12 col-md-4">
+                            <h3 className="h5 fw-bold">
+                                NombreDelLocal
+                            </h3>
+
+                            <p>
+                                Especialistas en{" "}
+                                <strong>entregar pedidos</strong>,
+                                para su comodidad.
+                            </p>
+                        </article>
+
+                        <article className="col-12 col-md-4">
+                            <h3 className="h5 fw-bold">
+                                Enlaces
+                            </h3>
+
+                            <ul className="list-unstyled">
+                                <li>
+                                    <a
+                                        href="#menu"
+                                        className="brand-footer-link"
+                                    >
+                                        Menú
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a
+                                        href="#carrito"
+                                        className="brand-footer-link"
+                                    >
+                                        Carrito
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a
+                                        href="#pedido"
+                                        className="brand-footer-link"
+                                    >
+                                        Mi pedido
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a
+                                        href="#contacto"
+                                        className="brand-footer-link"
+                                    >
+                                        Contacto
+                                    </a>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article className="col-12 col-md-4">
+                            <h3 className="h5 fw-bold">
+                                Contacto
+                            </h3>
+
+                            <p className="mb-1">
+                                📧 delivery-app@gmail.com
+                            </p>
+
+                            <p className="mb-1">
+                                📞 +54 9 381 xxx xxxx
+                            </p>
+
+                            <p className="mb-0">
+                                📍 San Miguel de Tucumán, Argentina
+                            </p>
+                        </article>
+                    </section>
+
+                    <hr className="mt-4" />
+
+                    <p className="text-center small mb-0">
+                        &copy; 2026 Delivery-app. Todos los
+                        derechos reservados.
+                    </p>
+                </section>
+            </footer>
 
             {/* ==================================================
                 MODAL DE INFORMACIÓN
             ================================================== */}
 
-            <ProductModal
-                productoInfo={productoInfo}
-                onClose={cerrarInformacionProducto}
-            />
+            {productoInfo && (
+                <section
+                    className="modal-info-overlay activo"
+                    id="modal-info"
+                    onClick={(evento) => {
+                        if (evento.target === evento.currentTarget) {
+                            cerrarInformacionProducto();
+                        }
+                    }}
+                >
+                    <article className="modal-info-content">
+                        <button
+                            type="button"
+                            id="modal-info-cerrar"
+                            className="modal-info-cerrar border-0 bg-transparent"
+                            onClick={cerrarInformacionProducto}
+                            aria-label="Cerrar información"
+                        >
+                            &times;
+                        </button>
+
+                        <img
+                            id="modal-info-imagen"
+                            src={productoInfo.imagen}
+                            alt={productoInfo.nombre}
+                        />
+
+                        <section className="modal-info-body">
+                            <h3 className="brand-title fw-bold">
+                                {productoInfo.nombre}
+                            </h3>
+
+                            <h6 className="fw-bold mt-3 mb-2">
+                                Ingredientes
+                            </h6>
+
+                            <ul className="mb-3">
+                                {productoInfo.ingredientes.map(
+                                    (ingrediente) => (
+                                        <li key={ingrediente}>
+                                            {ingrediente}
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+
+                            <h6 className="fw-bold mb-2">
+                                Elaboración
+                            </h6>
+
+                            <p className="text-muted mb-0">
+                                {productoInfo.elaboracion}
+                            </p>
+                        </section>
+                    </article>
+                </section>
+            )}
         </>
     );
 }
