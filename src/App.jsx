@@ -1,11 +1,16 @@
-
 import { useEffect, useState } from "react";
+
 import {
     productosPorCategoria,
     nombresCategorias,
     categorias
 } from "./data/products";
+
 import Navbar from "./components/Navbar";
+import Confirmation from "./components/Confirmation";
+import About from "./components/About";
+import Footer from "./components/Footer";
+import ProductModal from "./components/ProductModal";
 
 function App() {
     // ==========================================================
@@ -30,7 +35,6 @@ function App() {
 
     const [telefonoValido, setTelefonoValido] = useState(false);
     const [formularioEnviado, setFormularioEnviado] = useState(false);
-
     const [introVisible, setIntroVisible] = useState(true);
 
     // ==========================================================
@@ -153,9 +157,7 @@ function App() {
         setCategoriaSeleccionada(categoria);
 
         setTimeout(() => {
-            const submenu = document.getElementById(
-                "submenu-productos"
-            );
+            const submenu = document.getElementById("submenu-productos");
 
             if (submenu) {
                 submenu.scrollIntoView({
@@ -384,7 +386,7 @@ function App() {
 
                 <section className="hero-overlay"></section>
 
-              <Navbar />
+                <Navbar />
 
                 <section className="hero-content position-relative text-center text-white">
                     <img
@@ -448,15 +450,11 @@ function App() {
                                             <section className="category-overlay">
                                                 <section className="category-content">
                                                     <span className="category-number">
-                                                        {
-                                                            categoria.numero
-                                                        }
+                                                        {categoria.numero}
                                                     </span>
 
                                                     <h3>
-                                                        {
-                                                            categoria.nombre
-                                                        }
+                                                        {categoria.nombre}
                                                     </h3>
 
                                                     <span className="category-action">
@@ -516,9 +514,7 @@ function App() {
 
                                                 <section className="submenu-producto-body">
                                                     <h4 className="submenu-producto-nombre">
-                                                        {
-                                                            producto.nombre
-                                                        }
+                                                        {producto.nombre}
                                                     </h4>
 
                                                     <p className="submenu-producto-precio">
@@ -615,9 +611,7 @@ function App() {
                                                     </button>
 
                                                     <span className="fw-bold px-2">
-                                                        {
-                                                            item.cantidad
-                                                        }
+                                                        {item.cantidad}
                                                     </span>
 
                                                     <button
@@ -700,9 +694,7 @@ function App() {
 
                                 <form
                                     className="row g-3"
-                                    onSubmit={
-                                        manejarEnvioFormulario
-                                    }
+                                    onSubmit={manejarEnvioFormulario}
                                 >
                                     <section className="col-12 mb-2">
                                         <label className="form-label fw-semibold d-block">
@@ -1016,254 +1008,31 @@ function App() {
                     CONFIRMACIÓN
                 ================================================== */}
 
-                {formularioEnviado && (
-                    <section
-                        id="confirmacion"
-                        className="py-5"
-                    >
-                        <section className="container">
-                            <article
-                                className="alert brand-alert-success text-center mx-auto p-4 shadow-sm"
-                                style={{ maxWidth: "700px" }}
-                            >
-                                <h2 className="h4 fw-bold">
-                                    ¡Pedido Confirmado!
-                                </h2>
-
-                                <p className="mb-1">
-                                    Gracias por tu compra. Tu pedido
-                                    está siendo preparado.
-                                </p>
-
-                                <p className="fw-bold mb-0">
-                                    ¡Muchas gracias por elegirnos!
-                                </p>
-                            </article>
-                        </section>
-                    </section>
-                )}
+                <Confirmation
+                    formularioEnviado={formularioEnviado}
+                />
 
                 {/* ==================================================
                     SOBRE NOSOTROS
                 ================================================== */}
 
-                <section
-                    id="sobre-nosotros"
-                    className="py-5"
-                >
-                    <section className="container">
-                        <section className="row align-items-center g-5">
-                            <article className="col-12 col-lg-6">
-                                <img
-                                    src="/media/carrusel-producto1.jpg"
-                                    className="img-fluid rounded-4 shadow-sm w-100"
-                                    alt="Comida preparada por NombreDelLocal"
-                                />
-                            </article>
-
-                            <article className="col-12 col-lg-6">
-                                <p className="fw-bold mb-2 brand-precio">
-                                    SOBRE NOSOTROS
-                                </p>
-
-                                <h2 className="fw-bold mb-4 brand-title">
-                                    Una historia que empezó con
-                                    una idea sencilla
-                                </h2>
-
-                                <p className="text-muted">
-                                    Todo comenzó con una idea simple:
-                                    preparar comida rica, abundante y
-                                    hecha con dedicación, para que
-                                    cada persona pudiera disfrutarla
-                                    desde la comodidad de su casa.
-                                </p>
-
-                                <p className="text-muted">
-                                    Con el tiempo, ese pequeño sueño
-                                    fue creciendo. Hoy seguimos
-                                    manteniendo la misma esencia:
-                                    elegir buenos ingredientes,
-                                    preparar cada pedido con cuidado y
-                                    ofrecer una experiencia agradable
-                                    desde el primer clic hasta que la
-                                    comida llega a la mesa.
-                                </p>
-
-                                <blockquote className="border-start border-4 ps-3 my-4">
-                                    <p className="fst-italic mb-0">
-                                        “Un buen pedido no es solamente
-                                        una comida. Es un momento para
-                                        compartir, darse un gusto y
-                                        disfrutar.”
-                                    </p>
-                                </blockquote>
-
-                                <p className="fw-bold mb-0">
-                                    Gracias por elegirnos y ser parte
-                                    de nuestra historia.
-                                </p>
-                            </article>
-                        </section>
-                    </section>
-                </section>
+                <About />
             </main>
 
             {/* ==================================================
                 FOOTER
             ================================================== */}
 
-            <footer
-                id="contacto"
-                className="brand-footer pt-5 pb-3 mt-5"
-            >
-                <section className="container">
-                    <section className="row g-4">
-                        <article className="col-12 col-md-4">
-                            <h3 className="h5 fw-bold">
-                                NombreDelLocal
-                            </h3>
-
-                            <p>
-                                Especialistas en{" "}
-                                <strong>entregar pedidos</strong>,
-                                para su comodidad.
-                            </p>
-                        </article>
-
-                        <article className="col-12 col-md-4">
-                            <h3 className="h5 fw-bold">
-                                Enlaces
-                            </h3>
-
-                            <ul className="list-unstyled">
-                                <li>
-                                    <a
-                                        href="#menu"
-                                        className="brand-footer-link"
-                                    >
-                                        Menú
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a
-                                        href="#carrito"
-                                        className="brand-footer-link"
-                                    >
-                                        Carrito
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a
-                                        href="#pedido"
-                                        className="brand-footer-link"
-                                    >
-                                        Mi pedido
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a
-                                        href="#contacto"
-                                        className="brand-footer-link"
-                                    >
-                                        Contacto
-                                    </a>
-                                </li>
-                            </ul>
-                        </article>
-
-                        <article className="col-12 col-md-4">
-                            <h3 className="h5 fw-bold">
-                                Contacto
-                            </h3>
-
-                            <p className="mb-1">
-                                📧 delivery-app@gmail.com
-                            </p>
-
-                            <p className="mb-1">
-                                📞 +54 9 381 xxx xxxx
-                            </p>
-
-                            <p className="mb-0">
-                                📍 San Miguel de Tucumán, Argentina
-                            </p>
-                        </article>
-                    </section>
-
-                    <hr className="mt-4" />
-
-                    <p className="text-center small mb-0">
-                        &copy; 2026 Delivery-app. Todos los
-                        derechos reservados.
-                    </p>
-                </section>
-            </footer>
+            <Footer />
 
             {/* ==================================================
                 MODAL DE INFORMACIÓN
             ================================================== */}
 
-            {productoInfo && (
-                <section
-                    className="modal-info-overlay activo"
-                    id="modal-info"
-                    onClick={(evento) => {
-                        if (evento.target === evento.currentTarget) {
-                            cerrarInformacionProducto();
-                        }
-                    }}
-                >
-                    <article className="modal-info-content">
-                        <button
-                            type="button"
-                            id="modal-info-cerrar"
-                            className="modal-info-cerrar border-0 bg-transparent"
-                            onClick={cerrarInformacionProducto}
-                            aria-label="Cerrar información"
-                        >
-                            &times;
-                        </button>
-
-                        <img
-                            id="modal-info-imagen"
-                            src={productoInfo.imagen}
-                            alt={productoInfo.nombre}
-                        />
-
-                        <section className="modal-info-body">
-                            <h3 className="brand-title fw-bold">
-                                {productoInfo.nombre}
-                            </h3>
-
-                            <h6 className="fw-bold mt-3 mb-2">
-                                Ingredientes
-                            </h6>
-
-                            <ul className="mb-3">
-                                {productoInfo.ingredientes.map(
-                                    (ingrediente) => (
-                                        <li key={ingrediente}>
-                                            {ingrediente}
-                                        </li>
-                                    )
-                                )}
-                            </ul>
-
-                            <h6 className="fw-bold mb-2">
-                                Elaboración
-                            </h6>
-
-                            <p className="text-muted mb-0">
-                                {productoInfo.elaboracion}
-                            </p>
-                        </section>
-                    </article>
-                </section>
-            )}
+            <ProductModal
+                productoInfo={productoInfo}
+                onClose={cerrarInformacionProducto}
+            />
         </>
     );
 }
