@@ -1699,3 +1699,39 @@ body {
       1.35rem;
   }
 }
+
+/* El carrusel de React-Bootstrap no trae h-100, así que se lo damos acá */
+.hero-carousel .carousel-inner,
+.hero-carousel .carousel-item {
+  height: 100%;
+}
+
+/* Opcional: ahora Sobre Nosotros va justo debajo, 120vh deja mucho espacio */
+.hero {
+  min-height: 100vh;
+}
+
+/* Opcional: resalta la página actual en el navbar */
+.brand-navbar .nav-link.active {
+  color: #ffffff !important;
+}
+
+/* Para que el scroll no quede tapado por el navbar fijo */
+#submenu-productos,
+.menu-categories {
+  scroll-margin-top: 105px;
+}
+
+/* Botón principal de marca sobre Button de React-Bootstrap
+   (sin esto, al hacer clic se ve un destello azul de Bootstrap) */
+.brand-btn-primary {
+  --bs-btn-bg: var(--primary);
+  --bs-btn-border-color: var(--primary);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: var(--primary-dark);
+  --bs-btn-hover-border-color: var(--primary-dark);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--primary-dark);
+  --bs-btn-active-border-color: var(--primary-dark);
+  --bs-btn-active-color: #fff;
+}

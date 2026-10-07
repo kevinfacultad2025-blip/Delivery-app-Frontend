@@ -1,3 +1,4 @@
+import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
 
 function Cart({
     carrito,
@@ -8,112 +9,113 @@ function Cart({
     porcentajeDescuento
 }) {
     return (
-        <aside
-            id="carrito"
-            className="py-5 bg-white"
-        >
-            <section className="container">
-                <article
-                    className="card shadow-sm brand-card mx-auto"
-                    style={{ maxWidth: "900px" }}
-                >
-                    <section className="card-body p-4">
-                        <h2 className="h4 fw-bold mb-4 brand-title">
-                            Tu Carrito
-                        </h2>
+        <aside id="carrito" className="py-5 bg-white">
+            <Container>
+                <Row className="justify-content-center">
+                    <Col lg={10}>
+                        <Card className="shadow-sm brand-card">
+                            <Card.Body className="p-4">
+                                <Card.Title
+                                    as="h2"
+                                    className="h4 fw-bold mb-4 brand-title"
+                                >
+                                    Tu Carrito
+                                </Card.Title>
 
-                        <ul className="list-group list-group-flush">
-                            {carrito.length === 0 ? (
-                                <li className="list-group-item text-center text-muted py-4">
-                                    Todavía no agregaste
-                                    productos al carrito.
-                                </li>
-                            ) : (
-                                carrito.map((item) => (
-                                    <li
-                                        className="list-group-item d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 py-3"
-                                        key={item.id}
-                                    >
-                                        <span className="fw-bold">
-                                            {item.nombre}
-                                        </span>
-
-                                        <section className="d-flex align-items-center gap-2">
-                                            <button
-                                                className="btn btn-sm brand-btn-primary"
-                                                type="button"
-                                                onClick={() =>
-                                                    cambiarCantidad(
-                                                        item.id,
-                                                        -1
-                                                    )
-                                                }
+                                <ListGroup variant="flush">
+                                    {carrito.length === 0 ? (
+                                        <ListGroup.Item className="text-center text-muted py-4">
+                                            Todavía no agregaste productos al
+                                            carrito.
+                                        </ListGroup.Item>
+                                    ) : (
+                                        carrito.map((item) => (
+                                            <ListGroup.Item
+                                                key={item.id}
+                                                className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 py-3"
                                             >
-                                                -
-                                            </button>
+                                                <span className="fw-bold">
+                                                    {item.nombre}
+                                                </span>
 
-                                            <span className="fw-bold px-2">
-                                                {item.cantidad}
-                                            </span>
+                                                <section className="d-flex align-items-center gap-2">
+                                                    <Button
+                                                        size="sm"
+                                                        variant="primary"
+                                                        className="brand-btn-primary"
+                                                        onClick={() =>
+                                                            cambiarCantidad(
+                                                                item.id,
+                                                                -1
+                                                            )
+                                                        }
+                                                    >
+                                                        -
+                                                    </Button>
 
-                                            <button
-                                                className="btn btn-sm brand-btn-primary"
-                                                type="button"
-                                                onClick={() =>
-                                                    cambiarCantidad(
-                                                        item.id,
-                                                        1
-                                                    )
-                                                }
-                                            >
-                                                +
-                                            </button>
-                                        </section>
+                                                    <span className="fw-bold px-2">
+                                                        {item.cantidad}
+                                                    </span>
 
-                                        <span className="fw-bold text-end">
-                                            {formatearPrecio(
-                                                item.precio *
-                                                    item.cantidad
-                                            )}
-                                        </span>
+                                                    <Button
+                                                        size="sm"
+                                                        variant="primary"
+                                                        className="brand-btn-primary"
+                                                        onClick={() =>
+                                                            cambiarCantidad(
+                                                                item.id,
+                                                                1
+                                                            )
+                                                        }
+                                                    >
+                                                        +
+                                                    </Button>
+                                                </section>
 
-                                        <button
-                                            className="btn btn-sm btn-danger"
-                                            type="button"
-                                            onClick={() =>
-                                                eliminarDelCarrito(
-                                                    item.id
-                                                )
-                                            }
-                                        >
-                                            <i className="bi bi-trash"></i>{" "}
-                                            Eliminar
-                                        </button>
-                                    </li>
-                                ))
-                            )}
-                        </ul>
+                                                <span className="fw-bold text-end">
+                                                    {formatearPrecio(
+                                                        item.precio *
+                                                            item.cantidad
+                                                    )}
+                                                </span>
 
-                        <section className="d-flex justify-content-end mt-4">
-                            <p className="fs-5 fw-bold brand-title mb-0">
-                                Total:{" "}
-                                <span id="total-precio">
-                                    {formatearPrecio(
-                                        calcularTotal()
+                                                <Button
+                                                    size="sm"
+                                                    variant="danger"
+                                                    onClick={() =>
+                                                        eliminarDelCarrito(
+                                                            item.id
+                                                        )
+                                                    }
+                                                >
+                                                    <i className="bi bi-trash"></i>{" "}
+                                                    Eliminar
+                                                </Button>
+                                            </ListGroup.Item>
+                                        ))
                                     )}
-                                </span>
-                            </p>
-                        </section>
+                                </ListGroup>
 
-                        {porcentajeDescuento > 0 && (
-                            <p className="text-success fw-bold text-end mt-2 mb-0">
-                                Descuento aplicado:{" "}
-                                {porcentajeDescuento}%
-                            </p>
-                        )}
-                    </section>
-                </article>
-            </section>
+                                <section className="d-flex justify-content-end mt-4">
+                                    <p className="fs-5 fw-bold brand-title mb-0">
+                                        Total:{" "}
+                                        <span id="total-precio">
+                                            {formatearPrecio(calcularTotal())}
+                                        </span>
+                                    </p>
+                                </section>
+
+                                {porcentajeDescuento > 0 && (
+                                    <p className="text-success fw-bold text-end mt-2 mb-0">
+                                        Descuento aplicado:{" "}
+                                        {porcentajeDescuento}%
+                                    </p>
+                                )}
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         </aside>
     );
 }
