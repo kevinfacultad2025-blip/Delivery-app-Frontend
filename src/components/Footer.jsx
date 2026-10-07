@@ -1,93 +1,58 @@
+import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 import Contact from "./Contact";
+
+const ENLACES = [
+    { texto: "Inicio", ruta: "/" },
+    { texto: "Menú", ruta: "/menu" },
+    { texto: "Mi pedido", ruta: "/my-order" },
+    { texto: "Sobre Nosotros", ruta: "/about" },
+    { texto: "Contacto", ruta: "/contact" }
+];
 
 function Footer() {
     return (
-        /* ==================================================
-         *                 FOOTER
-         * ================================================== */
-        <footer
-            id="contacto"
-            className="brand-footer pt-5 pb-3 mt-5"
-        >
-            <section className="container">
-                <section className="row g-4">
-
-                    <article className="col-12 col-md-4">
-                        <h3 className="h5 fw-bold">
-                            NombreDelLocal
-                        </h3>
+        <footer className="brand-footer pt-5 pb-3 mt-5">
+            <Container>
+                <Row className="g-4">
+                    <Col xs={12} md={4}>
+                        <h3 className="h5 fw-bold">NombreDelLocal</h3>
 
                         <p>
-                            Especialistas en{" "}
-                            <strong>entregar pedidos</strong>,
+                            Especialistas en <strong>entregar pedidos</strong>,
                             para su comodidad.
                         </p>
-                    </article>
+                    </Col>
 
-                    <article className="col-12 col-md-4">
-                        <h3 className="h5 fw-bold">
-                            Enlaces
-                        </h3>
+                    <Col xs={12} md={4}>
+                        <h3 className="h5 fw-bold">Enlaces</h3>
 
                         <ul className="list-unstyled">
-                            <li>
-                                <a
-                                    href="#inicio"
-                                    className="brand-footer-link"
-                                >
-                                    Inicio
-                                </a>
-                            </li>
-
-                            <li>
-                                <a
-                                    href="#menu"
-                                    className="brand-footer-link"
-                                >
-                                    Menú
-                                </a>
-                            </li>
-
-                            <li>
-                                <a
-                                    href="#pedido"
-                                    className="brand-footer-link"
-                                >
-                                    Mi pedido
-                                </a>
-                            </li>
-
-                            <li>
-                                <a
-                                    href="#sobre-nosotros"
-                                    className="brand-footer-link"
-                                >
-                                    Sobre Nosotros
-                                </a>
-                            </li>
-
-                            <li>
-                                <a
-                                    href="#contacto"
-                                    className="brand-footer-link"
-                                >
-                                    Contacto
-                                </a>
-                            </li>
+                            {ENLACES.map((enlace) => (
+                                <li key={enlace.ruta}>
+                                    <Link
+                                        to={enlace.ruta}
+                                        className="brand-footer-link"
+                                    >
+                                        {enlace.texto}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
-                    </article>
+                    </Col>
 
-                    <Contact />
-
-                </section>
+                    <Col xs={12} md={4}>
+                        <Contact />
+                    </Col>
+                </Row>
 
                 <hr className="mt-4" />
 
                 <p className="text-center small mb-0">
-                    &copy; 2026 Delivery-app. Todos los
-                    derechos reservados.
+                    &copy; 2026 Delivery-app. Todos los derechos reservados.
                 </p>
-            </section>
+            </Container>
         </footer>
     );
 }

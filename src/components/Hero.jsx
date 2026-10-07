@@ -1,66 +1,88 @@
+import { useEffect, useState } from "react";
+import { Carousel, Image } from "react-bootstrap";
+
+const DIAPOSITIVAS = [
+    { src: "/media/carrusel-producto1.jpg", alt: "Hamburguesa de NombreDelLocal" },
+    { src: "/media/carrusel-producto2.avif", alt: "Pizza de NombreDelLocal" },
+    { src: "/media/carrusel-producto3.jpg", alt: "Sándwich de milanesa de NombreDelLocal" },
+    { src: "/media/carrusel-producto4.jpg", alt: "Empanadas de NombreDelLocal" },
+    { src: "/media/carrusel-producto5.avif", alt: "Postres de NombreDelLocal" }
+];
+
+const TIEMPO_ENTRE_IMAGENES = 4000;
 
 function Hero() {
+    // ---------- Carrusel ----------
+    const [indiceActivo, setIndiceActivo] = useState(0);
+
+    useEffect(() => {
+        const intervalo = setInterval(() => {
+            setIndiceActivo(
+                (indiceActual) => (indiceActual + 1) % DIAPOSITIVAS.length
+            );
+        }, TIEMPO_ENTRE_IMAGENES);
+
+        return () => clearInterval(intervalo);
+    }, [indiceActivo]);
+
+    // ---------- Presentación de bienvenida ----------
+    const [introVisible, setIntroVisible] = useState(
+        () => sessionStorage.getItem("introVista") !== "si"
+    );
+
+    useEffect(() => {
+        if (!introVisible) {
+            return;
+        }
+
+        const temporizador = setTimeout(() => {
+            sessionStorage.setItem("introVista", "si");
+            setIntroVisible(false);
+        }, 3000);
+
+        return () => clearTimeout(temporizador);
+    }, [introVisible]);
+
     return (
         <>
-            <header
-                id="inicio"
-                className="hero position-relative"
-            >
-                <section
-                    id="heroCarousel"
-                    className="carousel slide hero-carousel"
-                    data-bs-ride="carousel"
-                    data-bs-interval="4000"
-                >
-                    <section className="carousel-inner h-100">
+            {introVisible && (
+                <section id="intro-screen" className="intro-screen">
+                    <article className="intro-content text-center text-white">
+                        <Image
+                            src="/media/logo_local.png"
+                            alt="Logo de NombreDelLocal"
+                            className="intro-logo"
+                        />
 
-                        <article className="carousel-item active h-100">
-                            <img
-                                src="/media/carrusel-producto1.jpg"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Hamburguesa de NombreDelLocal"
-                            />
-                        </article>
-
-                        <article className="carousel-item h-100">
-                            <img
-                                src="/media/carrusel-producto2.avif"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Pizza de NombreDelLocal"
-                            />
-                        </article>
-
-                        <article className="carousel-item h-100">
-                            <img
-                                src="/media/carrusel-producto3.jpg"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Sándwich de milanesa de NombreDelLocal"
-                            />
-                        </article>
-
-                        <article className="carousel-item h-100">
-                            <img
-                                src="/media/carrusel-producto4.jpg"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Empanadas de NombreDelLocal"
-                            />
-                        </article>
-
-                        <article className="carousel-item h-100">
-                            <img
-                                src="/media/carrusel-producto5.avif"
-                                className="d-block w-100 h-100 object-fit-cover"
-                                alt="Postres de NombreDelLocal"
-                            />
-                        </article>
-
-                    </section>
+                        <h1 className="fw-bold">
+                            ¡Bienvenidos a NombreDelLocal!
+                        </h1>
+                    </article>
                 </section>
+            )}
+
+            <header id="inicio" className="hero position-relative">
+                <Carousel
+                    className="hero-carousel"
+                    activeIndex={indiceActivo}
+                    onSelect={setIndiceActivo}
+                    interval={null}
+                >
+                    {DIAPOSITIVAS.map((diapositiva) => (
+                        <Carousel.Item key={diapositiva.src}>
+                            <img
+                                src={diapositiva.src}
+                                className="d-block w-100 h-100 object-fit-cover"
+                                alt={diapositiva.alt}
+                            />
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
 
                 <section className="hero-overlay"></section>
 
                 <section className="hero-content position-relative text-center text-white">
-                    <img
+                    <Image
                         src="/media/logo_local.png"
                         alt="Logo de NombreDelLocal"
                         className="hero-logo"
