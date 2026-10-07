@@ -26,9 +26,9 @@ El proyecto fue desarrollado inicialmente con HTML, CSS y JavaScript y posterior
 
 ## Integrantes del grupo
 
-* Pablo Cano
-* Alberto Roman
-* Kevin Mendoza
+* [Pablo Cano](https://github.com/pablodev1337)
+* [Alberto Roman](https://github.com/AlbertoRoman10)
+* [Kevin Mendoza](https://github.com/kevinfacultad2025-blip)
 
 ## Contribuciones y Agradecimientos
 
@@ -36,15 +36,16 @@ Queremos agradecer especialmente a Matias Maza por contribuir en parte del códi
 
 ## Tecnologías utilizadas
 
-* React
-* Vite
-* JavaScript ES6
-* HTML5
-* CSS3
-* Bootstrap 5.3.3
-* React-Bootstrap
-* Bootstrap Icons
-* Git y GitHub
+* [Node.js](https://nodejs.org/es/docs)
+* [NPM](https://www.npmjs.com/)
+* [React](https://es.react.dev/learn)
+* [Vite](https://vitejs.dev/guide/)
+* [JavaScript ES6](https://developer.mozilla.org/es/docs/Web/JavaScript)
+* [HTML5](https://developer.mozilla.org/es/docs/Web/HTML)
+* [CSS3](https://developer.mozilla.org/es/docs/Web/CSS)
+* [React-Bootstrap](https://react-bootstrap.github.io/)
+* [Git y GitHub](https://docs.github.com/es)
+* [Vercel](https://vercel.com/docs)
 
 ## React + Vite
 
@@ -54,9 +55,12 @@ La interfaz se encuentra dividida en componentes reutilizables, permitiendo sepa
 
 Entre los componentes utilizados se encuentran:
 
+* Acerca de nosotros.
+* Contacto.
 * Navbar.
 * Hero.
 * Categorías del menú.
+* Categorías del submenú.
 * Tarjetas de productos.
 * Carrito.
 * Formulario de pedido.
@@ -162,24 +166,24 @@ De esta manera, Bootstrap y el CSS propio trabajan en conjunto para conseguir un
 ## Cómo instalar y ejecutar el proyecto
 
 1. Cloná el repositorio:
-    ```
-    git clone <url-del-repositorio>
-    ```
+```bash
+git clone <url-del-repositorio>
+```
 
 2. Ingresar a la carpeta:
-    ```
-    cd Delivery-app-Frontend
-    ```
+```bash
+cd Delivery-app-Frontend
+```
 
 3. Instalar las dependencias:
-    ```
-    npm.cmd install
-    ```
+```bash
+npm.cmd install
+```
 
 4. Ejecutar el proyecto:
-    ```
-    npm.cmd run dev
-    ```
+```bash
+npm.cmd run dev
+```
 
 Vite iniciará un servidor de desarrollo local y mostrará una dirección similar a:
 
@@ -191,28 +195,32 @@ La aplicación puede visualizarse ingresando a esa dirección desde el navegador
 
 La aplicación se organiza mediante una estructura basada en componentes y páginas:
 
+```bash
 src/
 ├── assets/
 ├── components/
 ├── data/
 ├── pages/
+├── routes/
+├── App.css
 ├── App.jsx
 ├── main.jsx
 └── index.css
+```
 
 ## Organización de ramas
 
 * `main`: rama estable, versión de entrega.
 * `dev`: rama principal de desarrollo.
-* `feature/maquetado-nombre-de-la-tarea`: ramas de trabajo individuales, que se integran a `dev` mediante Pull Requests.
+* `feature/nombre-de-la-tarea`: ramas de trabajo individuales, que se integran a `dev` mediante Pull Requests.
 * `refactor/nombre-de-la-tarea`: ramas de refactorización.
 
 ## Despliegue
 
 El proyecto se encuentra desplegado mediante Vercel.
 
-URL: https://delivery-app-frontend-xi.vercel.app/
+[URL]: (https://delivery-app-frontend-xi.vercel.app/)
 
 ## Estado del proyecto
 
-En desarrollo — TP nro. 6: Integración de una estructura mas profesional con React.
+En desarrollo — TP nro. 7: Uso de hooks, efectos como useState y useEffect.
