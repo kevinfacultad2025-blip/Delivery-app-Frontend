@@ -219,7 +219,7 @@ src/
 
 El proyecto se encuentra desplegado mediante Vercel.
 
-* [URL]: (https://delivery-app-frontend-xi.vercel.app/)
+* https://delivery-app-frontend-xi.vercel.app/
 
 ## Estado del proyecto
 
