@@ -45,7 +45,7 @@ function Rutas({
                 />
 
                 <Route
-                    path="/my-order"
+                    path="/mi-pedido"
                     element={
                         <OrderPage
                             carrito={carrito}
@@ -58,8 +58,8 @@ function Rutas({
                     }
                 />
 
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/sobre-nosotros" element={<AboutPage />} />
+                <Route path="/contacto" element={<ContactPage />} />
 
                 {/* Cualquier otra dirección muestra el error 404 */}
                 <Route path="*" element={<Error404Page />} />

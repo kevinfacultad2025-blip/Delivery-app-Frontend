@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 const ENLACES = [
     { texto: "Inicio", ruta: "/" },
     { texto: "Menú", ruta: "/menu" },
-    { texto: "Mi pedido", ruta: "/my-order" },
-    { texto: "Sobre Nosotros", ruta: "/about" },
-    { texto: "Contacto", ruta: "/contact" }
+    { texto: "Mi pedido", ruta: "/mi-pedido" },
+    { texto: "Sobre Nosotros", ruta: "/sobre-nosotros" },
+    { texto: "Contacto", ruta: "/contacto" }
 ];
 
 function Navbar() {
